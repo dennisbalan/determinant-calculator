@@ -12,11 +12,23 @@ int main(int argc, char *arv[]){
     }
     //for each row, determine if the inital multipicant is 0 and swap rows or use gaussian mechanics to reduce the matrix
     for(int i = 0; i < size; i++){
-         if(matrix[i][i] == 0){
+         if(matrix[i][i] == 0){	
+            //I decided to create a loop that makes row swaps more efficient. 	
+            //Instead of swapping the row with a 0 in i,i place, I use a for loop to look for an loop element,	
+            //i that does not have 0 in the array, and swap that row with the old row.	
+             //number is going to be the row number to be swapped	
+             int number = 0;	
+             //use the for loop to find the row that does not have row element, i = 0. break after you find it, to prevent weirdness	
+             for(int m = i+1; m < size; m++){	
+                 if(matrix[m][i] != 0){	
+                     number = m;	
+                     break;	
+                 }	
+	     }
              for(int j = 0;j < size; j++){
-                double temp = matrix[i+1][j];
-                matrix[i+1][j] = -1 * matrix[i][j];
-                matrix[i][j] = temp;
+                double temp = matrix[number][j];
+                matrix[number][j] = -1 * matrix[i][j];
+                matrix[number][j] = temp;
             }
          }
         if(i != 0){
